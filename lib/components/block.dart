@@ -6,8 +6,9 @@ class Block extends StatelessWidget {
   final height;
   final padding;
   final child;
+  final color;
 
-  const Block({super.key, required this.height, required this.width, this.padding, this.child});
+  const Block({super.key, this.height, required this.width, this.padding, this.color, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class Block extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: MyColors().mainComponent,
+          color: color ?? MyColors().mainComponent,
           borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.02),
           boxShadow: const [
             BoxShadow(

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sberlab/assets/sizes.dart';
 import 'package:sberlab/components/block.dart';
 import 'package:sberlab/components/drop_button.dart';
+import 'package:sberlab/components/food_value.dart';
+import 'package:sberlab/components/ingredient_widget.dart';
 import 'package:sberlab/components/my_toggle_buttons.dart';
+import 'package:sberlab/components/recipe_panel.dart';
+import 'package:sberlab/entity/ingredient.dart';
 
 import '../assets/colors.dart';
-
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -20,7 +22,12 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> heights = [];
   List<String> weights = [];
   List<String> ages = [];
-  List<String> physicalActivityLevels = ['отсутствует', 'небольшая', 'умеренная', 'большая'];
+  List<String> physicalActivityLevels = [
+    'отсутствует',
+    'небольшая',
+    'умеренная',
+    'большая'
+  ];
   List<String> diagnoses = ['диабет', 'рпп', 'гастрит', 'шизофрения'];
 
   String? currentHeight;
@@ -34,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String hintAge = 'Возраст';
   String hintPhysicalActivityLevel = 'Физическая активность';
   String hintDiagnose = 'Диагноз';
+
+
 
   final List<bool> selected = <bool>[false, true];
 
@@ -55,7 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
         val += ' год';
       } else if (1 < i % 10 && i % 10 < 5) {
         val += ' года';
-      } else val += ' лет';
+      } else
+        val += ' лет';
       ages.add(val);
     }
     super.initState();
@@ -74,7 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onChangedPhysicalActivityLevel(String? physicalActivityLeve) {
-    setState(() => currentPhysicalActivityLevel = physicalActivityLeve ?? currentPhysicalActivityLevel);
+    setState(() => currentPhysicalActivityLevel =
+        physicalActivityLeve ?? currentPhysicalActivityLevel);
   }
 
   void onChangedDiagnose(String? diagnose) {
@@ -90,106 +101,122 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors().main,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-          child: Column(
-            children: [
-              Block(
-                width: MediaQuery.of(context).size.width * 0.95,
-                height: MediaQuery.of(context).size.height * 0.1,
-                padding: MediaQuery.of(context).size.width * 0.01,
-                child: Row(
-                  children: [
-                    TopDropButton(dropdownValue: currentHeight, list: heights, onChanged: onChangedHeight, hint: hintHeight,), //height
-                    TopDropButton(dropdownValue: currentWeight, list: weights, onChanged: onChangedWeight, hint: hintWeight,), //weight
-                    TopDropButton(dropdownValue: currentAge, list: ages, onChanged: onChangedAge, hint: hintAge,), // age
-                    MyToggleButtons(selected: selected, onChanged: onChangedGender),
-                    TopDropButton(dropdownValue: currentPhysicalActivityLevel, list: physicalActivityLevels, onChanged: onChangedPhysicalActivityLevel, hint: hintPhysicalActivityLevel,), //physicalActivityLevel
-                    TopDropButton(dropdownValue: currentDiagnose, list: diagnoses, onChanged: onChangedDiagnose, hint: hintDiagnose,), //diagnoseId
-                    TextButton(
-                        onPressed:() {
-
-                    },
-                        child: Text(
+        backgroundColor: MyColors().main,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+            child: Column(
+              children: [
+                Block(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  padding: MediaQuery.of(context).size.width * 0.01,
+                  child: Row(
+                    children: [
+                      TopDropButton(
+                        dropdownValue: currentHeight,
+                        list: heights,
+                        onChanged: onChangedHeight,
+                        hint: hintHeight,
+                      ),
+                      //height
+                      TopDropButton(
+                        dropdownValue: currentWeight,
+                        list: weights,
+                        onChanged: onChangedWeight,
+                        hint: hintWeight,
+                      ),
+                      //weight
+                      TopDropButton(
+                        dropdownValue: currentAge,
+                        list: ages,
+                        onChanged: onChangedAge,
+                        hint: hintAge,
+                      ),
+                      // age
+                      MyToggleButtons(
+                          selected: selected, onChanged: onChangedGender),
+                      TopDropButton(
+                        dropdownValue: currentPhysicalActivityLevel,
+                        list: physicalActivityLevels,
+                        onChanged: onChangedPhysicalActivityLevel,
+                        hint: hintPhysicalActivityLevel,
+                      ),
+                      //physicalActivityLevel
+                      TopDropButton(
+                        dropdownValue: currentDiagnose,
+                        list: diagnoses,
+                        onChanged: onChangedDiagnose,
+                        hint: hintDiagnose,
+                      ),
+                      //diagnoseId
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
                             'Найти рецепты',
-                          style: TextStyle(
-                            color: MyColors().darkComponent,
-                            fontSize: 20,
-                             decoration: TextDecoration.underline
-                          ),
-                        )
-                    )
-                  ],
+                            style: TextStyle(
+                                color: MyColors().darkComponent,
+                                fontSize: 20,
+                                decoration: TextDecoration.underline),
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Block(
-                    width: MediaQuery.of(context).size.width * 0.65,
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    padding: MediaQuery.of(context).size.width * 0.01,
-                    child: Column(
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Завтрак'
-                            )
-                          ],
-                        )
+                        RecipePanel(),
+                        RecipePanel(),
+                        RecipePanel(),
                       ],
                     ),
-                  ),
-                  Block(
-                    width: MediaQuery.of(context).size.width * 0.27,
-                    height: MediaQuery.of(context).size.height * 0.6,
-                    padding: MediaQuery.of(context).size.width * 0.01
-                  ),
-                ],
-              )
-            ],
+                    Block(
+                      width: MediaQuery.of(context).size.width * 0.37,
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      padding: MediaQuery.of(context).size.width * 0.01,
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 
-  // Widget _d (List<String> list) {
-  //   dropdownValue = list.first,
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-  //     child: DropdownButton<String>(
-  //       value: dropdownValue,
-  //       onChanged: (String? newValue) {
-  //         setState(() => dropdownValue = newValue ?? dropdownValue);
-  //         print(5554444);
-  //         print(dropdownValue);
-  //         onChanged(newValue);
-  //       },
-  //       items: list
-  //           .map<DropdownMenuItem<String>>(
-  //               (String value) => DropdownMenuItem<String>(
-  //             value: value,
-  //             child: Text(value),
-  //           ))
-  //           .toList(),
-  //
-  //       // add extra sugar..
-  //       icon: Icon(Icons.keyboard_arrow_down),
-  //       iconSize: 20,
-  //       underline: SizedBox(),
-  //       menuMaxHeight: MediaQuery.of(context).size.height * 0.3,
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
-  //   );
-  // }
+// Widget _d (List<String> list) {
+//   dropdownValue = list.first,
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+//     child: DropdownButton<String>(
+//       value: dropdownValue,
+//       onChanged: (String? newValue) {
+//         setState(() => dropdownValue = newValue ?? dropdownValue);
+//         print(5554444);
+//         print(dropdownValue);
+//         onChanged(newValue);
+//       },
+//       items: list
+//           .map<DropdownMenuItem<String>>(
+//               (String value) => DropdownMenuItem<String>(
+//             value: value,
+//             child: Text(value),
+//           ))
+//           .toList(),
+//
+//       // add extra sugar..
+//       icon: Icon(Icons.keyboard_arrow_down),
+//       iconSize: 20,
+//       underline: SizedBox(),
+//       menuMaxHeight: MediaQuery.of(context).size.height * 0.3,
+//       borderRadius: BorderRadius.circular(10),
+//     ),
+//   );
+// }
 }
 
 // class CustomSwitch extends StatefulWidget {
