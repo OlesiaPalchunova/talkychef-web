@@ -15,8 +15,8 @@ class TotalParamsDTO with _$TotalParamsDTO {
     required int total_carbohydrates,
     required int required_calories,
     required int daily_protein_needs,
-    required int daily_fats_needs,
-    required int daily_carbohydrates_needs,
+    required int daily_fat_needs,
+    required int daily_carbohydrate_needs,
   }) = _TotalParamsDTO;
 
   factory TotalParamsDTO.fromJson(Map<String, Object?> json) =>

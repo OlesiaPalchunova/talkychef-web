@@ -8,7 +8,7 @@ part of 'ingredient_dto.dart';
 
 _$IngredientDTOImpl _$$IngredientDTOImplFromJson(Map<String, dynamic> json) =>
     _$IngredientDTOImpl(
-      ingredient_id: json['ingredient_id'] as String,
+      ingredient_id: (json['ingredient_id'] as num).toInt(),
       name: json['name'] as String,
       count: (json['count'] as num).toInt(),
       measure_unit_name: json['measure_unit_name'] as String,

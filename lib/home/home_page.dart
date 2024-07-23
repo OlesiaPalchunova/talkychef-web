@@ -7,12 +7,14 @@ import 'package:sberlab/components/ingredient_widget.dart';
 import 'package:sberlab/components/my_toggle_buttons.dart';
 import 'package:sberlab/components/progress_line.dart';
 import 'package:sberlab/components/meal_panel.dart';
+import 'package:sberlab/dto/daily_menu_dto.dart';
 import 'package:sberlab/entity/daily_menu.dart';
 import 'package:sberlab/entity/food_value.dart';
 import 'package:sberlab/entity/ingredient.dart';
 import 'package:sberlab/entity/product.dart';
 import 'package:sberlab/entity/recipe.dart';
 import 'package:sberlab/entity/total_params.dart';
+import 'package:sberlab/mappers/daily_menu_mapper.dart';
 
 import '../assets/colors.dart';
 
@@ -57,121 +59,392 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<bool> selected = <bool>[false, true];
 
-  final dailyMenu = DailyMenu(
-    date: 'date',
-    breakfastMeals: Meal(
-      recipes: [
-        Recipe(
-          id: 1,
-          name: 'Блины',
-          ingredients: [
-            Ingredient(name: 'Яйца', count: '2 шт'),
-            Ingredient(name: 'Мука', count: '300 г'),
-            Ingredient(name: 'Молоко', count: '150 мл'),
-            Ingredient(name: 'Соль', count: '1 ч.л'),
-            Ingredient(name: 'Сахар', count: '200 г'),
-          ],
-          servings: 3,
-          prepTimeMins: 30,
-        ),
-        Recipe(
-          id: 1,
-          name: 'Блины',
-          ingredients: [
-            Ingredient(name: 'Яйца', count: '2 шт'),
-            Ingredient(name: 'Мука', count: '300 г'),
-            Ingredient(name: 'Молоко', count: '150 мл'),
-            Ingredient(name: 'Соль', count: '1 ч.л'),
-            Ingredient(name: 'Сахар', count: '200 г'),
-          ],
-          servings: 3,
-          prepTimeMins: 30,
-        ),
+  bool infoExist = false;
+
+  final dto = {
+    "date": "2024-07-23T04:39:46.535Z",
+    "breakfast_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
       ],
-      products: [
-        Product(
-          id: 1,
-          name: 'Сметана',
-          serving: 20,
-        ),
-        Product(
-          id: 1,
-          name: 'Сметана',
-          serving: 20,
-        ),
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
       ],
-      kilocalories: 400,
-      fats: 20,
-      carbohydrates: 50,
-      proteins: 20,
-    ),
-    launchMeals: Meal(
-      recipes: [
-        Recipe(
-          id: 1,
-          name: 'Борщ',
-          ingredients: [
-            Ingredient(name: 'Яйца', count: '2 шт'),
-            Ingredient(name: 'Мука', count: '300 г'),
-            Ingredient(name: 'Молоко', count: '150 мл'),
-            Ingredient(name: 'Соль', count: '1 ч.л'),
-            Ingredient(name: 'Сахар', count: '200 г'),
-          ],
-          servings: 3,
-          prepTimeMins: 30,
-        )
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "lunch_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
       ],
-      products: [
-        Product(
-          id: 1,
-          name: 'Сметана',
-          serving: 20,
-        )
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
       ],
-      kilocalories: 400,
-      fats: 20,
-      carbohydrates: 50,
-      proteins: 20,
-    ),
-    dinnerMeals: Meal(
-      recipes: [
-        Recipe(
-          id: 1,
-          name: 'Блины',
-          ingredients: [
-            Ingredient(name: 'Яйца', count: '2 шт'),
-            Ingredient(name: 'Мука', count: '300 г'),
-            Ingredient(name: 'Молоко', count: '150 мл'),
-            Ingredient(name: 'Соль', count: '1 ч.л'),
-            Ingredient(name: 'Сахар', count: '200 г'),
-          ],
-          servings: 3,
-          prepTimeMins: 30,
-        )
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "dinner_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
       ],
-      products: [
-        Product(
-          id: 1,
-          name: 'Сметана',
-          serving: 20,
-        )
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
       ],
-      kilocalories: 400,
-      fats: 20,
-      carbohydrates: 50,
-      proteins: 20,
-    ),
-    params: TotalParams(
-        totalCalories: 1000,
-        totalFats: 233,
-        totalProteins: 543,
-        totalCarbohydrate: 653,
-        requiredCaloties: 1300,
-        dailyProteinNeeds: 300,
-        dailyFatNeeds: 400,
-        dailyCarbohydrateNeeds: 100,
-    ),
-  );
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "total_params": {
+      "total_calories": 0,
+      "total_fats": 0,
+      "total_proteins": 0,
+      "total_carbohydrates": 0,
+      "required_calories": 0,
+      "daily_protein_needs": 0,
+      "daily_fat_needs": 0,
+      "daily_carbohydrate_needs": 0
+    }
+  };
+
+  final dailyMenu = DailyMenuMapper().fromDto(DailyMenuDTO.fromJson({
+    "date": "2024-07-23T04:39:46.535Z",
+    "breakfast_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
+      ],
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
+      ],
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "lunch_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
+      ],
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
+      ],
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "dinner_meals": {
+      "recipes": [
+        {
+          "recipe_id": 0,
+          "recipe_name": "string",
+          "cook_time_mins": 0,
+          "author_uid": "string",
+          "prep_time_mins": 0,
+          "servings": 0,
+          "kilocalories": 0,
+          "proteins": 0,
+          "fats": 0,
+          "carbohydrates": 0,
+          "ingredients_distributions": [
+            {
+              "name": "string",
+              "measure_unit_name": "string",
+              "count": 0,
+              "ingredient_id": 0
+            }
+          ]
+        }
+      ],
+      "products": [
+        {
+          "product_id": 0,
+          "product_name": "string",
+          "protein": 0,
+          "fat": 0,
+          "carbohydrates": 0,
+          "energyValue": 0,
+          "serving": 0,
+          "categories": "string"
+        }
+      ],
+      "kilocalories": 0,
+      "fats": 0,
+      "carbohydrates": 0,
+      "proteins": 0
+    },
+    "total_params": {
+      "total_calories": 0,
+      "total_fats": 0,
+      "total_proteins": 0,
+      "total_carbohydrates": 0,
+      "required_calories": 0,
+      "daily_protein_needs": 0,
+      "daily_fat_needs": 0,
+      "daily_carbohydrate_needs": 0
+    }
+  }));
+
+
+  // final dailyMenu = DailyMenu(
+  //   date: DateTime.now(),
+  //   breakfastMeals: Meal(
+  //     recipes: [
+  //       Recipe(
+  //         id: 1,
+  //         name: 'Блины',
+  //         ingredients: [
+  //           Ingredient(id: 1, name: 'Яйца', count: '2 шт'),
+  //           Ingredient(id: 1, name: 'Мука', count: '300 г'),
+  //           Ingredient(id: 1, name: 'Молоко', count: '150 мл'),
+  //           Ingredient(id: 1, name: 'Соль', count: '1 ч.л'),
+  //           Ingredient(id: 1, name: 'Сахар', count: '200 г'),
+  //         ],
+  //         servings: 3,
+  //         prepTimeMins: 30,
+  //       ),
+  //       Recipe(
+  //         id: 1,
+  //         name: 'Блины',
+  //         ingredients: [
+  //           Ingredient(name: 'Яйца', count: '2 шт'),
+  //           Ingredient(name: 'Мука', count: '300 г'),
+  //           Ingredient(name: 'Молоко', count: '150 мл'),
+  //           Ingredient(name: 'Соль', count: '1 ч.л'),
+  //           Ingredient(name: 'Сахар', count: '200 г'),
+  //         ],
+  //         servings: 3,
+  //         prepTimeMins: 30,
+  //       ),
+  //     ],
+  //     products: [
+  //       Product(
+  //         id: 1,
+  //         name: 'Сметана',
+  //         serving: 20,
+  //       ),
+  //       Product(
+  //         id: 1,
+  //         name: 'Сметана',
+  //         serving: 20,
+  //       ),
+  //     ],
+  //     kilocalories: 400,
+  //     fats: 20,
+  //     carbohydrates: 50,
+  //     proteins: 20,
+  //   ),
+  //   launchMeals: Meal(
+  //     recipes: [
+  //       Recipe(
+  //         id: 1,
+  //         name: 'Борщ',
+  //         ingredients: [
+  //           Ingredient(name: 'Яйца', count: '2 шт'),
+  //           Ingredient(name: 'Мука', count: '300 г'),
+  //           Ingredient(name: 'Молоко', count: '150 мл'),
+  //           Ingredient(name: 'Соль', count: '1 ч.л'),
+  //           Ingredient(name: 'Сахар', count: '200 г'),
+  //         ],
+  //         servings: 3,
+  //         prepTimeMins: 30,
+  //       )
+  //     ],
+  //     products: [
+  //       Product(
+  //         id: 1,
+  //         name: 'Сметана',
+  //         serving: 20,
+  //       )
+  //     ],
+  //     kilocalories: 400,
+  //     fats: 20,
+  //     carbohydrates: 50,
+  //     proteins: 20,
+  //   ),
+  //   dinnerMeals: Meal(
+  //     recipes: [
+  //       Recipe(
+  //         id: 1,
+  //         name: 'Блины',
+  //         ingredients: [
+  //           Ingredient(name: 'Яйца', count: '2 шт'),
+  //           Ingredient(name: 'Мука', count: '300 г'),
+  //           Ingredient(name: 'Молоко', count: '150 мл'),
+  //           Ingredient(name: 'Соль', count: '1 ч.л'),
+  //           Ingredient(name: 'Сахар', count: '200 г'),
+  //         ],
+  //         servings: 3,
+  //         prepTimeMins: 30,
+  //       )
+  //     ],
+  //     products: [
+  //       Product(
+  //         id: 1,
+  //         name: 'Сметана',
+  //         serving: 20,
+  //       )
+  //     ],
+  //     kilocalories: 400,
+  //     fats: 20,
+  //     carbohydrates: 50,
+  //     proteins: 20,
+  //   ),
+  //   params: TotalParams(
+  //       totalCalories: 1000,
+  //       totalFats: 233,
+  //       totalProteins: 543,
+  //       totalCarbohydrate: 653,
+  //       requiredCaloties: 1300,
+  //       dailyProteinNeeds: 300,
+  //       dailyFatNeeds: 400,
+  //       dailyCarbohydrateNeeds: 100,
+  //   ),
+  // );
 
   @override
   void initState() {
@@ -281,7 +554,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     //diagnoseId
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          infoExist = true;
+                        });
+                      },
                       child: Text(
                         'Найти рецепты',
                         style: TextStyle(
@@ -293,63 +570,71 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      MealPanel(type: MealType.breakfast, meal: dailyMenu.breakfastMeals,),
-                      MealPanel(type: MealType.launch, meal: dailyMenu.launchMeals,),
-                      MealPanel(type: MealType.dinner, meal: dailyMenu.dinnerMeals,),
-                    ],
-                  ),
-                  Block(
-                    width: MediaQuery.of(context).size.width * 0.37,
-                    padding: MediaQuery.of(context).size.width * 0.01,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Column(
-                        children: [
-                          ProgressLine(
-                            color: MyColors().darkComponent,
-                            value: 'Калории',
-                            currentCount: 100,
-                            totalCount: 150,
-                          ),
-                          ProgressLine(
-                            color: MyColors().orange,
-                            value: 'Жиры',
-                            currentCount: 10,
-                            totalCount: 150,
-                          ),
-                          ProgressLine(
-                            color: MyColors().green,
-                            value: 'Углеводы',
-                            currentCount: 70,
-                            totalCount: 150,
-                          ),
-                          ProgressLine(
-                            color: MyColors().red,
-                            value: 'Белки',
-                            currentCount: 130,
-                            totalCount: 150,
-                          ),
-                          ProgressLine(
-                            color: MyColors().blue,
-                            value: 'Клетчатка',
-                            currentCount: 110,
-                            totalCount: 150,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              infoExist ? _filledBody() : _emptyBody(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _emptyBody() {
+    return SizedBox();
+  }
+
+  Widget _filledBody() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            MealPanel(type: MealType.breakfast, meal: dailyMenu.breakfastMeals,),
+            MealPanel(type: MealType.launch, meal: dailyMenu.launchMeals,),
+            MealPanel(type: MealType.dinner, meal: dailyMenu.dinnerMeals,),
+          ],
+        ),
+        Block(
+          width: MediaQuery.of(context).size.width * 0.37,
+          padding: MediaQuery.of(context).size.width * 0.01,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Column(
+              children: [
+                ProgressLine(
+                  color: MyColors().darkComponent,
+                  value: 'Калории',
+                  currentCount: 100,
+                  totalCount: 150,
+                ),
+                ProgressLine(
+                  color: MyColors().orange,
+                  value: 'Жиры',
+                  currentCount: 10,
+                  totalCount: 150,
+                ),
+                ProgressLine(
+                  color: MyColors().green,
+                  value: 'Углеводы',
+                  currentCount: 70,
+                  totalCount: 150,
+                ),
+                ProgressLine(
+                  color: MyColors().red,
+                  value: 'Белки',
+                  currentCount: 130,
+                  totalCount: 150,
+                ),
+                ProgressLine(
+                  color: MyColors().blue,
+                  value: 'Клетчатка',
+                  currentCount: 110,
+                  totalCount: 150,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

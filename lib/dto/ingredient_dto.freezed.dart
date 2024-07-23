@@ -20,7 +20,7 @@ IngredientDTO _$IngredientDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$IngredientDTO {
-  String get ingredient_id => throw _privateConstructorUsedError;
+  int get ingredient_id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
   String get measure_unit_name => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $IngredientDTOCopyWith<$Res> {
       _$IngredientDTOCopyWithImpl<$Res, IngredientDTO>;
   @useResult
   $Res call(
-      {String ingredient_id, String name, int count, String measure_unit_name});
+      {int ingredient_id, String name, int count, String measure_unit_name});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$IngredientDTOCopyWithImpl<$Res, $Val extends IngredientDTO>
       ingredient_id: null == ingredient_id
           ? _value.ingredient_id
           : ingredient_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$IngredientDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String ingredient_id, String name, int count, String measure_unit_name});
+      {int ingredient_id, String name, int count, String measure_unit_name});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class __$$IngredientDTOImplCopyWithImpl<$Res>
       ingredient_id: null == ingredient_id
           ? _value.ingredient_id
           : ingredient_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,7 +144,7 @@ class _$IngredientDTOImpl
       _$$IngredientDTOImplFromJson(json);
 
   @override
-  final String ingredient_id;
+  final int ingredient_id;
   @override
   final String name;
   @override
@@ -202,7 +202,7 @@ class _$IngredientDTOImpl
 
 abstract class _IngredientDTO implements IngredientDTO {
   factory _IngredientDTO(
-      {required final String ingredient_id,
+      {required final int ingredient_id,
       required final String name,
       required final int count,
       required final String measure_unit_name}) = _$IngredientDTOImpl;
@@ -211,7 +211,7 @@ abstract class _IngredientDTO implements IngredientDTO {
       _$IngredientDTOImpl.fromJson;
 
   @override
-  String get ingredient_id;
+  int get ingredient_id;
   @override
   String get name;
   @override

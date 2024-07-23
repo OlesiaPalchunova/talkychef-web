@@ -3,7 +3,7 @@ import 'package:sberlab/entity/recipe.dart';
 import 'package:sberlab/entity/total_params.dart';
 
 class DailyMenu {
-  final String date;
+  final DateTime date;
   final Meal breakfastMeals;
   final Meal launchMeals;
   final Meal dinnerMeals;
