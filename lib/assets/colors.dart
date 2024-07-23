@@ -16,4 +16,10 @@ class MyColors {
   Color get middleText => Color(0xff757575);
 
   Color get orange => Color(0xffEFA367);
+
+  Color get green => Color(0xff63C049);
+
+  Color get red => Color(0xffD35F56);
+
+  Color get blue => Color(0xff80DDF9);
 }

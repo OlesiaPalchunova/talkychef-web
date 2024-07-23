@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sberlab/assets/colors.dart';
 
-class FoodValue extends StatelessWidget {
+class FoodValueWidget extends StatelessWidget {
   final value;
   final count;
-  const FoodValue({super.key, required this.count, required this.value});
+  const FoodValueWidget({super.key, required this.count, required this.value});
 
   @override
   Widget build(BuildContext context) {
