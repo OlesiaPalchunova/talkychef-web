@@ -13,6 +13,7 @@ class TotalParamsMapper{
       dailyProteinNeeds: dto.daily_protein_needs,
       dailyFatNeeds: dto.daily_fat_needs,
       dailyCarbohydrateNeeds: dto.daily_carbohydrate_needs,
+      imt: dto.imt,
     );
   }
 
@@ -27,6 +28,7 @@ class TotalParamsMapper{
       daily_protein_needs: entity.dailyProteinNeeds,
       daily_fat_needs: entity.dailyFatNeeds,
       daily_carbohydrate_needs: entity.dailyCarbohydrateNeeds,
+      imt: entity.imt,
     );
   }
 }

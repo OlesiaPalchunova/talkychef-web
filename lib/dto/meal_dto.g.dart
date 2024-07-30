@@ -14,7 +14,7 @@ _$MealDTOImpl _$$MealDTOImplFromJson(Map<String, dynamic> json) =>
       products: (json['products'] as List<dynamic>)
           .map((e) => ProductDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
-      kilocalories: (json['kilocalories'] as num).toInt(),
+      calories: (json['calories'] as num).toInt(),
       proteins: (json['proteins'] as num).toInt(),
       fats: (json['fats'] as num).toInt(),
       carbohydrates: (json['carbohydrates'] as num).toInt(),
@@ -24,7 +24,7 @@ Map<String, dynamic> _$$MealDTOImplToJson(_$MealDTOImpl instance) =>
     <String, dynamic>{
       'recipes': instance.recipes,
       'products': instance.products,
-      'kilocalories': instance.kilocalories,
+      'calories': instance.calories,
       'proteins': instance.proteins,
       'fats': instance.fats,
       'carbohydrates': instance.carbohydrates,

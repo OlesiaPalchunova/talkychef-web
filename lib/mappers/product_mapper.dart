@@ -9,10 +9,10 @@ class ProductMapper{
       id: dto.product_id,
       name: dto.product_name,
       serving: dto.serving,
-      protein: dto.protein,
-      fat: dto.fat,
+      proteins: dto.proteins,
+      fats: dto.fats,
       carbohydrates: dto.carbohydrates,
-      energyValue: dto.energyValue,
+      calories: dto.calories,
       categories: dto.categories,
     );
   }
@@ -23,10 +23,10 @@ class ProductMapper{
       product_id: entity.id,
       product_name: entity.name,
       serving: entity.serving,
-      protein: entity.protein,
-      fat: entity.fat,
+      proteins: entity.proteins,
+      fats: entity.fats,
       carbohydrates: entity.carbohydrates,
-      energyValue: entity.energyValue,
+      calories: entity.calories,
       categories: entity.categories,
     );
   }

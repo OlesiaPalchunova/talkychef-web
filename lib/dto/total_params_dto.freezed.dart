@@ -20,14 +20,15 @@ TotalParamsDTO _$TotalParamsDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TotalParamsDTO {
-  int get total_calories => throw _privateConstructorUsedError;
-  int get total_proteins => throw _privateConstructorUsedError;
-  int get total_fats => throw _privateConstructorUsedError;
-  int get total_carbohydrates => throw _privateConstructorUsedError;
-  int get required_calories => throw _privateConstructorUsedError;
-  int get daily_protein_needs => throw _privateConstructorUsedError;
-  int get daily_fat_needs => throw _privateConstructorUsedError;
-  int get daily_carbohydrate_needs => throw _privateConstructorUsedError;
+  double get total_calories => throw _privateConstructorUsedError;
+  double get total_proteins => throw _privateConstructorUsedError;
+  double get total_fats => throw _privateConstructorUsedError;
+  double get total_carbohydrates => throw _privateConstructorUsedError;
+  double get required_calories => throw _privateConstructorUsedError;
+  double get daily_protein_needs => throw _privateConstructorUsedError;
+  double get daily_fat_needs => throw _privateConstructorUsedError;
+  double get daily_carbohydrate_needs => throw _privateConstructorUsedError;
+  double get imt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,14 +43,15 @@ abstract class $TotalParamsDTOCopyWith<$Res> {
       _$TotalParamsDTOCopyWithImpl<$Res, TotalParamsDTO>;
   @useResult
   $Res call(
-      {int total_calories,
-      int total_proteins,
-      int total_fats,
-      int total_carbohydrates,
-      int required_calories,
-      int daily_protein_needs,
-      int daily_fat_needs,
-      int daily_carbohydrate_needs});
+      {double total_calories,
+      double total_proteins,
+      double total_fats,
+      double total_carbohydrates,
+      double required_calories,
+      double daily_protein_needs,
+      double daily_fat_needs,
+      double daily_carbohydrate_needs,
+      double imt});
 }
 
 /// @nodoc
@@ -73,40 +75,45 @@ class _$TotalParamsDTOCopyWithImpl<$Res, $Val extends TotalParamsDTO>
     Object? daily_protein_needs = null,
     Object? daily_fat_needs = null,
     Object? daily_carbohydrate_needs = null,
+    Object? imt = null,
   }) {
     return _then(_value.copyWith(
       total_calories: null == total_calories
           ? _value.total_calories
           : total_calories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_proteins: null == total_proteins
           ? _value.total_proteins
           : total_proteins // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_fats: null == total_fats
           ? _value.total_fats
           : total_fats // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_carbohydrates: null == total_carbohydrates
           ? _value.total_carbohydrates
           : total_carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       required_calories: null == required_calories
           ? _value.required_calories
           : required_calories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_protein_needs: null == daily_protein_needs
           ? _value.daily_protein_needs
           : daily_protein_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_fat_needs: null == daily_fat_needs
           ? _value.daily_fat_needs
           : daily_fat_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_carbohydrate_needs: null == daily_carbohydrate_needs
           ? _value.daily_carbohydrate_needs
           : daily_carbohydrate_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      imt: null == imt
+          ? _value.imt
+          : imt // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -120,14 +127,15 @@ abstract class _$$TotalParamsDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int total_calories,
-      int total_proteins,
-      int total_fats,
-      int total_carbohydrates,
-      int required_calories,
-      int daily_protein_needs,
-      int daily_fat_needs,
-      int daily_carbohydrate_needs});
+      {double total_calories,
+      double total_proteins,
+      double total_fats,
+      double total_carbohydrates,
+      double required_calories,
+      double daily_protein_needs,
+      double daily_fat_needs,
+      double daily_carbohydrate_needs,
+      double imt});
 }
 
 /// @nodoc
@@ -149,40 +157,45 @@ class __$$TotalParamsDTOImplCopyWithImpl<$Res>
     Object? daily_protein_needs = null,
     Object? daily_fat_needs = null,
     Object? daily_carbohydrate_needs = null,
+    Object? imt = null,
   }) {
     return _then(_$TotalParamsDTOImpl(
       total_calories: null == total_calories
           ? _value.total_calories
           : total_calories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_proteins: null == total_proteins
           ? _value.total_proteins
           : total_proteins // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_fats: null == total_fats
           ? _value.total_fats
           : total_fats // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       total_carbohydrates: null == total_carbohydrates
           ? _value.total_carbohydrates
           : total_carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       required_calories: null == required_calories
           ? _value.required_calories
           : required_calories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_protein_needs: null == daily_protein_needs
           ? _value.daily_protein_needs
           : daily_protein_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_fat_needs: null == daily_fat_needs
           ? _value.daily_fat_needs
           : daily_fat_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       daily_carbohydrate_needs: null == daily_carbohydrate_needs
           ? _value.daily_carbohydrate_needs
           : daily_carbohydrate_needs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      imt: null == imt
+          ? _value.imt
+          : imt // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -200,31 +213,34 @@ class _$TotalParamsDTOImpl
       required this.required_calories,
       required this.daily_protein_needs,
       required this.daily_fat_needs,
-      required this.daily_carbohydrate_needs});
+      required this.daily_carbohydrate_needs,
+      required this.imt});
 
   factory _$TotalParamsDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$TotalParamsDTOImplFromJson(json);
 
   @override
-  final int total_calories;
+  final double total_calories;
   @override
-  final int total_proteins;
+  final double total_proteins;
   @override
-  final int total_fats;
+  final double total_fats;
   @override
-  final int total_carbohydrates;
+  final double total_carbohydrates;
   @override
-  final int required_calories;
+  final double required_calories;
   @override
-  final int daily_protein_needs;
+  final double daily_protein_needs;
   @override
-  final int daily_fat_needs;
+  final double daily_fat_needs;
   @override
-  final int daily_carbohydrate_needs;
+  final double daily_carbohydrate_needs;
+  @override
+  final double imt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TotalParamsDTO(total_calories: $total_calories, total_proteins: $total_proteins, total_fats: $total_fats, total_carbohydrates: $total_carbohydrates, required_calories: $required_calories, daily_protein_needs: $daily_protein_needs, daily_fat_needs: $daily_fat_needs, daily_carbohydrate_needs: $daily_carbohydrate_needs)';
+    return 'TotalParamsDTO(total_calories: $total_calories, total_proteins: $total_proteins, total_fats: $total_fats, total_carbohydrates: $total_carbohydrates, required_calories: $required_calories, daily_protein_needs: $daily_protein_needs, daily_fat_needs: $daily_fat_needs, daily_carbohydrate_needs: $daily_carbohydrate_needs, imt: $imt)';
   }
 
   @override
@@ -240,7 +256,8 @@ class _$TotalParamsDTOImpl
       ..add(DiagnosticsProperty('daily_protein_needs', daily_protein_needs))
       ..add(DiagnosticsProperty('daily_fat_needs', daily_fat_needs))
       ..add(DiagnosticsProperty(
-          'daily_carbohydrate_needs', daily_carbohydrate_needs));
+          'daily_carbohydrate_needs', daily_carbohydrate_needs))
+      ..add(DiagnosticsProperty('imt', imt));
   }
 
   @override
@@ -264,7 +281,8 @@ class _$TotalParamsDTOImpl
                 other.daily_fat_needs == daily_fat_needs) &&
             (identical(
                     other.daily_carbohydrate_needs, daily_carbohydrate_needs) ||
-                other.daily_carbohydrate_needs == daily_carbohydrate_needs));
+                other.daily_carbohydrate_needs == daily_carbohydrate_needs) &&
+            (identical(other.imt, imt) || other.imt == imt));
   }
 
   @JsonKey(ignore: true)
@@ -278,7 +296,8 @@ class _$TotalParamsDTOImpl
       required_calories,
       daily_protein_needs,
       daily_fat_needs,
-      daily_carbohydrate_needs);
+      daily_carbohydrate_needs,
+      imt);
 
   @JsonKey(ignore: true)
   @override
@@ -297,34 +316,37 @@ class _$TotalParamsDTOImpl
 
 abstract class _TotalParamsDTO implements TotalParamsDTO {
   factory _TotalParamsDTO(
-      {required final int total_calories,
-      required final int total_proteins,
-      required final int total_fats,
-      required final int total_carbohydrates,
-      required final int required_calories,
-      required final int daily_protein_needs,
-      required final int daily_fat_needs,
-      required final int daily_carbohydrate_needs}) = _$TotalParamsDTOImpl;
+      {required final double total_calories,
+      required final double total_proteins,
+      required final double total_fats,
+      required final double total_carbohydrates,
+      required final double required_calories,
+      required final double daily_protein_needs,
+      required final double daily_fat_needs,
+      required final double daily_carbohydrate_needs,
+      required final double imt}) = _$TotalParamsDTOImpl;
 
   factory _TotalParamsDTO.fromJson(Map<String, dynamic> json) =
       _$TotalParamsDTOImpl.fromJson;
 
   @override
-  int get total_calories;
+  double get total_calories;
   @override
-  int get total_proteins;
+  double get total_proteins;
   @override
-  int get total_fats;
+  double get total_fats;
   @override
-  int get total_carbohydrates;
+  double get total_carbohydrates;
   @override
-  int get required_calories;
+  double get required_calories;
   @override
-  int get daily_protein_needs;
+  double get daily_protein_needs;
   @override
-  int get daily_fat_needs;
+  double get daily_fat_needs;
   @override
-  int get daily_carbohydrate_needs;
+  double get daily_carbohydrate_needs;
+  @override
+  double get imt;
   @override
   @JsonKey(ignore: true)
   _$$TotalParamsDTOImplCopyWith<_$TotalParamsDTOImpl> get copyWith =>

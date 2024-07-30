@@ -13,7 +13,7 @@ class MealDTO with _$MealDTO {
   factory MealDTO({
     required List<RecipeDTO> recipes,
     required List<ProductDTO> products,
-    required int kilocalories,
+    required int calories,
     required int proteins,
     required int fats,
     required int carbohydrates,

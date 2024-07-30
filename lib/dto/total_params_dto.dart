@@ -9,14 +9,15 @@ part 'total_params_dto.g.dart';
 @freezed
 class TotalParamsDTO with _$TotalParamsDTO {
   factory TotalParamsDTO({
-    required int total_calories,
-    required int total_proteins,
-    required int total_fats,
-    required int total_carbohydrates,
-    required int required_calories,
-    required int daily_protein_needs,
-    required int daily_fat_needs,
-    required int daily_carbohydrate_needs,
+    required double total_calories,
+    required double total_proteins,
+    required double total_fats,
+    required double total_carbohydrates,
+    required double required_calories,
+    required double daily_protein_needs,
+    required double daily_fat_needs,
+    required double daily_carbohydrate_needs,
+    required double imt,
   }) = _TotalParamsDTO;
 
   factory TotalParamsDTO.fromJson(Map<String, Object?> json) =>

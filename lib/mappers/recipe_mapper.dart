@@ -6,16 +6,15 @@ class RecipeMapper{
   @override
   Recipe fromDto(RecipeDTO dto) {
     return Recipe(
-      id: dto.recipe_id,
-      name: dto.recipe_name,
+      id: dto.id,
+      name: dto.name,
       servings: dto.servings,
       proteins: dto.proteins,
       fats: dto.fats,
       carbohydrates: dto.carbohydrates,
-      kilocalories: dto.kilocalories,
+      calories: dto.calories,
       ingredients: dto.ingredients_distributions.map((ingredient_dto) => IngredientMapper().fromDto(ingredient_dto)).toList(),
       prepTimeMins: dto.prep_time_mins,
-      authorUid: dto.author_uid,
       cookTimeMins: dto.cook_time_mins,
     );
   }
@@ -23,16 +22,15 @@ class RecipeMapper{
   @override
   RecipeDTO toDto(Recipe entity) {
     return RecipeDTO(
-      recipe_id: entity.id,
-      recipe_name: entity.name,
+      id: entity.id,
+      name: entity.name,
       servings: entity.servings,
       proteins: entity.proteins,
       fats: entity.fats,
       carbohydrates: entity.carbohydrates,
-      kilocalories: entity.kilocalories,
+      calories: entity.calories,
       ingredients_distributions: entity.ingredients.map((ingredient_dto) => IngredientMapper().toDto(ingredient_dto)).toList(),
       prep_time_mins: entity.prepTimeMins,
-      author_uid: entity.authorUid,
       cook_time_mins: entity.cookTimeMins,
     );
   }

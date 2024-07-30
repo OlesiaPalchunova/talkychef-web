@@ -6,23 +6,21 @@ class Recipe {
   final List<Ingredient> ingredients;
   final int? prepTimeMins;
   final int cookTimeMins;
-  final int servings;
-  final int kilocalories;
-  final int proteins;
-  final int fats;
-  final int carbohydrates;
-  final String authorUid;
+  final double servings;
+  final double calories;
+  final double proteins;
+  final double fats;
+  final double carbohydrates;
 
   Recipe({
     required this.id,
     required this.name,
     required this.ingredients,
     required this.servings,
-    required this.kilocalories,
+    required this.calories,
     required this.proteins,
     required this.fats,
     required this.carbohydrates,
-    required this.authorUid,
     required this.cookTimeMins,
     this.prepTimeMins,
   });

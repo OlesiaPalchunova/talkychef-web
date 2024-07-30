@@ -9,11 +9,11 @@ class ProductDTO with _$ProductDTO {
   factory ProductDTO({
     required int product_id,
     required String product_name,
-    required int serving,
-    required int protein,
-    required int fat,
-    required int carbohydrates,
-    required int energyValue,
+    required double serving,
+    required double proteins,
+    required double fats,
+    required double carbohydrates,
+    required double calories,
     required String categories,
   }) = _ProductDTO;
 

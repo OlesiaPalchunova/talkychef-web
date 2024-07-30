@@ -9,7 +9,7 @@ class IngredientDTO with _$IngredientDTO {
   factory IngredientDTO({
     required int ingredient_id,
     required String name,
-    required int count,
+    required double count,
     required String measure_unit_name,
   }) = _IngredientDTO;
 

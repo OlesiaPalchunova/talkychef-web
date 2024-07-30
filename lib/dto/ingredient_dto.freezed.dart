@@ -22,7 +22,7 @@ IngredientDTO _$IngredientDTOFromJson(Map<String, dynamic> json) {
 mixin _$IngredientDTO {
   int get ingredient_id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  double get count => throw _privateConstructorUsedError;
   String get measure_unit_name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $IngredientDTOCopyWith<$Res> {
       _$IngredientDTOCopyWithImpl<$Res, IngredientDTO>;
   @useResult
   $Res call(
-      {int ingredient_id, String name, int count, String measure_unit_name});
+      {int ingredient_id, String name, double count, String measure_unit_name});
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$IngredientDTOCopyWithImpl<$Res, $Val extends IngredientDTO>
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       measure_unit_name: null == measure_unit_name
           ? _value.measure_unit_name
           : measure_unit_name // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$$IngredientDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int ingredient_id, String name, int count, String measure_unit_name});
+      {int ingredient_id, String name, double count, String measure_unit_name});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class __$$IngredientDTOImplCopyWithImpl<$Res>
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       measure_unit_name: null == measure_unit_name
           ? _value.measure_unit_name
           : measure_unit_name // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ class _$IngredientDTOImpl
   @override
   final String name;
   @override
-  final int count;
+  final double count;
   @override
   final String measure_unit_name;
 
@@ -204,7 +204,7 @@ abstract class _IngredientDTO implements IngredientDTO {
   factory _IngredientDTO(
       {required final int ingredient_id,
       required final String name,
-      required final int count,
+      required final double count,
       required final String measure_unit_name}) = _$IngredientDTOImpl;
 
   factory _IngredientDTO.fromJson(Map<String, dynamic> json) =
@@ -215,7 +215,7 @@ abstract class _IngredientDTO implements IngredientDTO {
   @override
   String get name;
   @override
-  int get count;
+  double get count;
   @override
   String get measure_unit_name;
   @override

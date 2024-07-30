@@ -1,6 +1,13 @@
+import 'dart:html';
+import 'dart:typed_data';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:sberlab/assets/sizes.dart';
 import 'package:sberlab/components/block.dart';
+import 'package:sberlab/components/chart.dart';
 import 'package:sberlab/components/drop_button.dart';
 import 'package:sberlab/components/food_value_widget.dart';
 import 'package:sberlab/components/ingredient_widget.dart';
@@ -8,15 +15,23 @@ import 'package:sberlab/components/my_toggle_buttons.dart';
 import 'package:sberlab/components/progress_line.dart';
 import 'package:sberlab/components/meal_panel.dart';
 import 'package:sberlab/dto/daily_menu_dto.dart';
+import 'package:sberlab/dto/diagnosis_dto.dart';
+import 'package:sberlab/dto/total_params_dto.dart';
 import 'package:sberlab/entity/daily_menu.dart';
+import 'package:sberlab/entity/diagnosis.dart';
 import 'package:sberlab/entity/food_value.dart';
 import 'package:sberlab/entity/ingredient.dart';
 import 'package:sberlab/entity/product.dart';
 import 'package:sberlab/entity/recipe.dart';
 import 'package:sberlab/entity/total_params.dart';
 import 'package:sberlab/mappers/daily_menu_mapper.dart';
+import 'package:sberlab/mappers/diagnosis_mapper.dart';
+import 'package:sberlab/mappers/total_params_mapper.dart';
+import 'package:sberlab/service/daily_menu_service.dart';
+import 'package:sberlab/service/mock_daily_menu_service.dart';
 
 import '../assets/colors.dart';
+import 'dart:html' as html;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -29,14 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> heights = [];
   List<String> weights = [];
   List<String> ages = [];
-  List<String> physicalActivityLevels = [
-    'отсутствует',
-    'небольшая',
-    'умеренная',
-    'большая'
-  ];
+  List<String> activitylevels = [];
 
-  List<String> diagnoses = ['диабет', 'рпп', 'гастрит', 'шизофрения'];
+  List<String> diagnosisValues = [];
   List<FoodValue> foodValues = [
     FoodValue(value: 'Калории', count: 375, unit: 'ккл'),
     FoodValue(value: 'Жиры', count: 13, unit: 'г'),
@@ -44,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FoodValue(value: 'Белки', count: 23, unit: 'г'),
     FoodValue(value: 'Клетчатка', count: 4, unit: 'г'),
   ];
+  List<Diagnosis> diagnosis = [];
 
   String? currentHeight;
   String? currentWeight;
@@ -58,396 +69,60 @@ class _MyHomePageState extends State<MyHomePage> {
   String hintDiagnose = 'Диагноз';
 
   final List<bool> selected = <bool>[false, true];
-
   bool infoExist = false;
+  bool isLoading = true;
 
-  final dto = {
-    "date": "2024-07-23T04:39:46.535Z",
-    "breakfast_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "lunch_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "dinner_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "total_params": {
-      "total_calories": 0,
-      "total_fats": 0,
-      "total_proteins": 0,
-      "total_carbohydrates": 0,
-      "required_calories": 0,
-      "daily_protein_needs": 0,
-      "daily_fat_needs": 0,
-      "daily_carbohydrate_needs": 0
+  DailyMenu dailyMenu =
+      DailyMenuMapper().fromDto(DailyMenuDTO.fromJson(jsonMenu));
+
+  // final dailyMenu = dailyMenuInfo;
+
+  void _getLevels() {
+    DailyMenuService().getActivitylevel().then((value) {
+      setState(() => activitylevels = value);
+    });
+  }
+
+  void _getDiagnosis() {
+    DailyMenuService().getDiagnosis().then((value) {
+      setState(() {
+        diagnosis = value;
+        diagnosisValues =
+            diagnosis.map((e) => e.diagnosisDescription as String).toList();
+      });
+    });
+  }
+
+  void _getDailyMenu() {
+    int id = 0;
+    for (var d in diagnosis) {
+      if (d.diagnosisDescription == currentDiagnose) {
+        id = d.id;
+        break;
+      }
     }
-  };
-
-  final dailyMenu = DailyMenuMapper().fromDto(DailyMenuDTO.fromJson({
-    "date": "2024-07-23T04:39:46.535Z",
-    "breakfast_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "lunch_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "dinner_meals": {
-      "recipes": [
-        {
-          "recipe_id": 0,
-          "recipe_name": "string",
-          "cook_time_mins": 0,
-          "author_uid": "string",
-          "prep_time_mins": 0,
-          "servings": 0,
-          "kilocalories": 0,
-          "proteins": 0,
-          "fats": 0,
-          "carbohydrates": 0,
-          "ingredients_distributions": [
-            {
-              "name": "string",
-              "measure_unit_name": "string",
-              "count": 0,
-              "ingredient_id": 0
-            }
-          ]
-        }
-      ],
-      "products": [
-        {
-          "product_id": 0,
-          "product_name": "string",
-          "protein": 0,
-          "fat": 0,
-          "carbohydrates": 0,
-          "energyValue": 0,
-          "serving": 0,
-          "categories": "string"
-        }
-      ],
-      "kilocalories": 0,
-      "fats": 0,
-      "carbohydrates": 0,
-      "proteins": 0
-    },
-    "total_params": {
-      "total_calories": 0,
-      "total_fats": 0,
-      "total_proteins": 0,
-      "total_carbohydrates": 0,
-      "required_calories": 0,
-      "daily_protein_needs": 0,
-      "daily_fat_needs": 0,
-      "daily_carbohydrate_needs": 0
-    }
-  }));
-
-
-  // final dailyMenu = DailyMenu(
-  //   date: DateTime.now(),
-  //   breakfastMeals: Meal(
-  //     recipes: [
-  //       Recipe(
-  //         id: 1,
-  //         name: 'Блины',
-  //         ingredients: [
-  //           Ingredient(id: 1, name: 'Яйца', count: '2 шт'),
-  //           Ingredient(id: 1, name: 'Мука', count: '300 г'),
-  //           Ingredient(id: 1, name: 'Молоко', count: '150 мл'),
-  //           Ingredient(id: 1, name: 'Соль', count: '1 ч.л'),
-  //           Ingredient(id: 1, name: 'Сахар', count: '200 г'),
-  //         ],
-  //         servings: 3,
-  //         prepTimeMins: 30,
-  //       ),
-  //       Recipe(
-  //         id: 1,
-  //         name: 'Блины',
-  //         ingredients: [
-  //           Ingredient(name: 'Яйца', count: '2 шт'),
-  //           Ingredient(name: 'Мука', count: '300 г'),
-  //           Ingredient(name: 'Молоко', count: '150 мл'),
-  //           Ingredient(name: 'Соль', count: '1 ч.л'),
-  //           Ingredient(name: 'Сахар', count: '200 г'),
-  //         ],
-  //         servings: 3,
-  //         prepTimeMins: 30,
-  //       ),
-  //     ],
-  //     products: [
-  //       Product(
-  //         id: 1,
-  //         name: 'Сметана',
-  //         serving: 20,
-  //       ),
-  //       Product(
-  //         id: 1,
-  //         name: 'Сметана',
-  //         serving: 20,
-  //       ),
-  //     ],
-  //     kilocalories: 400,
-  //     fats: 20,
-  //     carbohydrates: 50,
-  //     proteins: 20,
-  //   ),
-  //   launchMeals: Meal(
-  //     recipes: [
-  //       Recipe(
-  //         id: 1,
-  //         name: 'Борщ',
-  //         ingredients: [
-  //           Ingredient(name: 'Яйца', count: '2 шт'),
-  //           Ingredient(name: 'Мука', count: '300 г'),
-  //           Ingredient(name: 'Молоко', count: '150 мл'),
-  //           Ingredient(name: 'Соль', count: '1 ч.л'),
-  //           Ingredient(name: 'Сахар', count: '200 г'),
-  //         ],
-  //         servings: 3,
-  //         prepTimeMins: 30,
-  //       )
-  //     ],
-  //     products: [
-  //       Product(
-  //         id: 1,
-  //         name: 'Сметана',
-  //         serving: 20,
-  //       )
-  //     ],
-  //     kilocalories: 400,
-  //     fats: 20,
-  //     carbohydrates: 50,
-  //     proteins: 20,
-  //   ),
-  //   dinnerMeals: Meal(
-  //     recipes: [
-  //       Recipe(
-  //         id: 1,
-  //         name: 'Блины',
-  //         ingredients: [
-  //           Ingredient(name: 'Яйца', count: '2 шт'),
-  //           Ingredient(name: 'Мука', count: '300 г'),
-  //           Ingredient(name: 'Молоко', count: '150 мл'),
-  //           Ingredient(name: 'Соль', count: '1 ч.л'),
-  //           Ingredient(name: 'Сахар', count: '200 г'),
-  //         ],
-  //         servings: 3,
-  //         prepTimeMins: 30,
-  //       )
-  //     ],
-  //     products: [
-  //       Product(
-  //         id: 1,
-  //         name: 'Сметана',
-  //         serving: 20,
-  //       )
-  //     ],
-  //     kilocalories: 400,
-  //     fats: 20,
-  //     carbohydrates: 50,
-  //     proteins: 20,
-  //   ),
-  //   params: TotalParams(
-  //       totalCalories: 1000,
-  //       totalFats: 233,
-  //       totalProteins: 543,
-  //       totalCarbohydrate: 653,
-  //       requiredCaloties: 1300,
-  //       dailyProteinNeeds: 300,
-  //       dailyFatNeeds: 400,
-  //       dailyCarbohydrateNeeds: 100,
-  //   ),
-  // );
+    print(454545);
+    print(id);
+    final height = currentHeight!.split(' ');
+    final weight = currentWeight!.split(' ');
+    final age = currentAge!.split(' ');
+    DailyMenuService()
+        .getDailyMenu(height[0], weight[0], age[0], selected[0] == true, currentPhysicalActivityLevel!, id)
+        .then((value) {
+      setState(() {
+        dailyMenu = value;
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   void initState() {
+    _getLevels();
+    _getDiagnosis();
+
+
+    // DailyMenuService().getDailyMenu(150, 50, 17, true, "Умеренная", 1);
     for (int i = 100; i < 210; i++) {
       heights.add('$i см');
     }
@@ -501,17 +176,41 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void updateMeal(MealType type) async {
+    final newDailyMenu =
+        await DailyMenuService().updateMeal(type.name, 1, dailyMenu);
+    setState(() {
+      dailyMenu = newDailyMenu;
+    });
+  }
+
+  void updateRecipe(int id, MealType type) async {
+    final newDailyMenu =
+        await DailyMenuService().updateRecipe(id, type, 1, dailyMenu);
+    setState(() {
+      dailyMenu = newDailyMenu;
+    });
+  }
+
+  void updateProduct(int id, MealType type) async {
+    final newDailyMenu =
+        await DailyMenuService().updateProduct(id, type, 1, dailyMenu);
+    setState(() {
+      dailyMenu = newDailyMenu;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors().main,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.015),
           child: Column(
             children: [
               Block(
-                width: MediaQuery.of(context).size.width * 0.95,
+                width: MediaQuery.of(context).size.width * 0.955,
                 height: MediaQuery.of(context).size.height * 0.1,
                 padding: MediaQuery.of(context).size.width * 0.01,
                 child: Row(
@@ -521,6 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       list: heights,
                       onChanged: onChangedHeight,
                       hint: hintHeight,
+                      width: 80,
                     ),
                     //height
                     TopDropButton(
@@ -528,6 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       list: weights,
                       onChanged: onChangedWeight,
                       hint: hintWeight,
+                      width: 70,
                     ),
                     //weight
                     TopDropButton(
@@ -535,42 +236,82 @@ class _MyHomePageState extends State<MyHomePage> {
                       list: ages,
                       onChanged: onChangedAge,
                       hint: hintAge,
+                      width: 100,
                     ),
                     // age
                     MyToggleButtons(
-                        selected: selected, onChanged: onChangedGender),
+                      selected: selected,
+                      onChanged: onChangedGender,
+                    ),
                     TopDropButton(
                       dropdownValue: currentPhysicalActivityLevel,
-                      list: physicalActivityLevels,
+                      list: activitylevels,
                       onChanged: onChangedPhysicalActivityLevel,
                       hint: hintPhysicalActivityLevel,
+                      width: 200,
                     ),
                     //physicalActivityLevel
                     TopDropButton(
                       dropdownValue: currentDiagnose,
-                      list: diagnoses,
+                      list: diagnosisValues,
                       onChanged: onChangedDiagnose,
                       hint: hintDiagnose,
+                      width: 270,
                     ),
                     //diagnoseId
-                    TextButton(
+                    if (!infoExist) TextButton(
                       onPressed: () {
                         setState(() {
-                          infoExist = true;
-                        });
+                          if (currentHeight != null
+                              && currentAge != null
+                              && currentDiagnose != null
+                              && currentPhysicalActivityLevel != null
+                              && currentWeight != null) {
+                              infoExist = true;
+                              _getDailyMenu();
+                            }
+                          });
                       },
                       child: Text(
                         'Найти рецепты',
                         style: TextStyle(
-                            color: MyColors().darkComponent,
-                            fontSize: 20,
-                            decoration: TextDecoration.underline),
+                          color: MyColors().darkComponent,
+                          fontSize: 20,
+                          decoration: TextDecoration.underline,
+                          decorationColor: MyColors().darkComponent,
+                        ),
                       ),
-                    )
+                    ),
+                    if (infoExist && !isLoading) Spacer(),
+                    if (infoExist && !isLoading)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: IconButton(
+                            onPressed: () async {
+                              Uint8List pdfInBytes = await DailyMenuService().getPDF(dailyMenu);
+                              final blob = html.Blob([pdfInBytes], 'application/pdf');
+                              final url = html.Url.createObjectUrlFromBlob(blob);
+                              final anchor = html.document.createElement('a') as html.AnchorElement
+                                ..href = url
+                                ..style.display = 'none'
+                                ..download = 'pdf.pdf';
+                              html.document.body?.children.add(anchor);
+                              anchor.click();
+                            },
+                            icon: Icon(
+                                Icons.download,
+                              size: 30,
+                              color: MyColors().darkComponent,
+                            ),
+                          ),
+                        ),
+
                   ],
                 ),
               ),
-              infoExist ? _filledBody() : _emptyBody(),
+              infoExist
+                  ? (isLoading ? _loading() : _filledBody())
+                  : _emptyBody(),
             ],
           ),
         ),
@@ -578,61 +319,198 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _loading() {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 100,
+          ),
+          Container(
+            width: 300,
+            height: 200,
+            child: const RiveAnimation.asset('loading_animation.riv'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _emptyBody() {
-    return SizedBox();
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 100,
+          ),
+          Container(
+            width: 300,
+            height: 200,
+            child: const RiveAnimation.asset('404_cat.riv'),
+          ),
+          Text(
+            "Введите свои данные!",
+            style: TextStyle(
+              fontSize: 30,
+              color: MyColors().darkComponent,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  double _handleDouble(double num) {
+    num *= 100;
+    num = num.roundToDouble();
+    num /= 100;
+    return num;
   }
 
   Widget _filledBody() {
+    List<int> breakfastValues = [
+      dailyMenu.breakfastMeals.fats,
+      dailyMenu.breakfastMeals.carbohydrates,
+      dailyMenu.breakfastMeals.proteins,
+    ];
+    List<int> launchValues = [
+      dailyMenu.launchMeals.fats,
+      dailyMenu.launchMeals.carbohydrates,
+      dailyMenu.launchMeals.proteins,
+    ];
+    List<int> dinnerValues = [
+      dailyMenu.dinnerMeals.fats,
+      dailyMenu.dinnerMeals.carbohydrates,
+      dailyMenu.dinnerMeals.proteins,
+    ];
+    List<Color> colors = [
+      MyColors().darkComponent,
+      MyColors().orange,
+      MyColors().green,
+    ];
+    int i = 0;
+    double imt = dailyMenu.params.imt;
+    List<PieChartSectionData> breakfastSections = breakfastValues.map((value) {
+      return PieChartSectionData(
+        color: colors[i++],
+        value: value.toDouble(),
+        title: '${value}%',
+        radius: 40,
+      );
+    }).toList();
+    i = 0;
+    List<PieChartSectionData> launchSections = launchValues.map((value) {
+      return PieChartSectionData(
+        color: colors[i++],
+        value: value.toDouble(),
+        title: '${value}%',
+        radius: 40,
+      );
+    }).toList();
+    i = 0;
+    List<PieChartSectionData> dinnerSections = dinnerValues.map((value) {
+      return PieChartSectionData(
+        color: colors[i++],
+        value: value.toDouble(),
+        title: '${value}%',
+        radius: 40,
+      );
+    }).toList();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           children: [
-            MealPanel(type: MealType.breakfast, meal: dailyMenu.breakfastMeals,),
-            MealPanel(type: MealType.launch, meal: dailyMenu.launchMeals,),
-            MealPanel(type: MealType.dinner, meal: dailyMenu.dinnerMeals,),
+            MealPanel(
+              updateMeal: updateMeal,
+              updateRecipe: updateRecipe,
+              updateProduct: updateProduct,
+              type: MealType.breakfast,
+              meal: dailyMenu.breakfastMeals,
+            ),
+            MealPanel(
+              updateMeal: updateMeal,
+              updateRecipe: updateRecipe,
+              updateProduct: updateProduct,
+              type: MealType.launch,
+              meal: dailyMenu.launchMeals,
+            ),
+            MealPanel(
+              updateMeal: updateMeal,
+              updateRecipe: updateRecipe,
+              updateProduct: updateProduct,
+              type: MealType.dinner,
+              meal: dailyMenu.dinnerMeals,
+            ),
           ],
         ),
-        Block(
-          width: MediaQuery.of(context).size.width * 0.37,
-          padding: MediaQuery.of(context).size.width * 0.01,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Column(
-              children: [
-                ProgressLine(
-                  color: MyColors().darkComponent,
-                  value: 'Калории',
-                  currentCount: 100,
-                  totalCount: 150,
+        Column(
+          children: [
+            Block(
+              width: MediaQuery.of(context).size.width * 0.37,
+              padding: MediaQuery.of(context).size.width * 0.01,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "ИМТ: ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: MyColors().darkComponent,
+                            ),
+                          ),
+                          Text(
+                            "${_handleDouble(imt)}",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ProgressLine(
+                      color: MyColors().darkComponent,
+                      value: 'Жиры',
+                      currentCount: dailyMenu.params.totalFats,
+                      totalCount: dailyMenu.params.dailyFatNeeds,
+                    ),
+                    ProgressLine(
+                      color: MyColors().orange,
+                      value: 'Углеводы',
+                      currentCount: dailyMenu.params.totalCarbohydrate,
+                      totalCount: dailyMenu.params.dailyCarbohydrateNeeds,
+                    ),
+                    ProgressLine(
+                      color: MyColors().green,
+                      value: 'Белки',
+                      currentCount: dailyMenu.params.totalProteins,
+                      totalCount: dailyMenu.params.dailyProteinNeeds,
+                    ),
+                    ProgressLine(
+                      color: MyColors().red,
+                      value: 'Калории',
+                      currentCount: dailyMenu.params.totalCalories,
+                      totalCount: dailyMenu.params.requiredCaloties,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50.0, vertical: 20),
+                      child: Row(
+                        children: [
+                          Chart(sections: breakfastSections, title: "Завтрак"),
+                          Chart(sections: launchSections, title: "Обед"),
+                          Chart(sections: dinnerSections, title: "Ужин"),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                ProgressLine(
-                  color: MyColors().orange,
-                  value: 'Жиры',
-                  currentCount: 10,
-                  totalCount: 150,
-                ),
-                ProgressLine(
-                  color: MyColors().green,
-                  value: 'Углеводы',
-                  currentCount: 70,
-                  totalCount: 150,
-                ),
-                ProgressLine(
-                  color: MyColors().red,
-                  value: 'Белки',
-                  currentCount: 130,
-                  totalCount: 150,
-                ),
-                ProgressLine(
-                  color: MyColors().blue,
-                  value: 'Клетчатка',
-                  currentCount: 110,
-                  totalCount: 150,
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ],
     );

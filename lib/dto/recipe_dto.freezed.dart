@@ -20,18 +20,17 @@ RecipeDTO _$RecipeDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RecipeDTO {
-  int get recipe_id => throw _privateConstructorUsedError;
-  String get recipe_name => throw _privateConstructorUsedError;
-  String get author_uid => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   List<IngredientDTO> get ingredients_distributions =>
       throw _privateConstructorUsedError;
   int get cook_time_mins => throw _privateConstructorUsedError;
   int? get prep_time_mins => throw _privateConstructorUsedError;
-  int get servings => throw _privateConstructorUsedError;
-  int get kilocalories => throw _privateConstructorUsedError;
-  int get proteins => throw _privateConstructorUsedError;
-  int get fats => throw _privateConstructorUsedError;
-  int get carbohydrates => throw _privateConstructorUsedError;
+  double get servings => throw _privateConstructorUsedError;
+  double get calories => throw _privateConstructorUsedError;
+  double get proteins => throw _privateConstructorUsedError;
+  double get fats => throw _privateConstructorUsedError;
+  double get carbohydrates => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,17 +44,16 @@ abstract class $RecipeDTOCopyWith<$Res> {
       _$RecipeDTOCopyWithImpl<$Res, RecipeDTO>;
   @useResult
   $Res call(
-      {int recipe_id,
-      String recipe_name,
-      String author_uid,
+      {int id,
+      String name,
       List<IngredientDTO> ingredients_distributions,
       int cook_time_mins,
       int? prep_time_mins,
-      int servings,
-      int kilocalories,
-      int proteins,
-      int fats,
-      int carbohydrates});
+      double servings,
+      double calories,
+      double proteins,
+      double fats,
+      double carbohydrates});
 }
 
 /// @nodoc
@@ -71,30 +69,25 @@ class _$RecipeDTOCopyWithImpl<$Res, $Val extends RecipeDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recipe_id = null,
-    Object? recipe_name = null,
-    Object? author_uid = null,
+    Object? id = null,
+    Object? name = null,
     Object? ingredients_distributions = null,
     Object? cook_time_mins = null,
     Object? prep_time_mins = freezed,
     Object? servings = null,
-    Object? kilocalories = null,
+    Object? calories = null,
     Object? proteins = null,
     Object? fats = null,
     Object? carbohydrates = null,
   }) {
     return _then(_value.copyWith(
-      recipe_id: null == recipe_id
-          ? _value.recipe_id
-          : recipe_id // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
-      recipe_name: null == recipe_name
-          ? _value.recipe_name
-          : recipe_name // ignore: cast_nullable_to_non_nullable
-              as String,
-      author_uid: null == author_uid
-          ? _value.author_uid
-          : author_uid // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       ingredients_distributions: null == ingredients_distributions
           ? _value.ingredients_distributions
@@ -111,23 +104,23 @@ class _$RecipeDTOCopyWithImpl<$Res, $Val extends RecipeDTO>
       servings: null == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as int,
-      kilocalories: null == kilocalories
-          ? _value.kilocalories
-          : kilocalories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
       proteins: null == proteins
           ? _value.proteins
           : proteins // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       fats: null == fats
           ? _value.fats
           : fats // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       carbohydrates: null == carbohydrates
           ? _value.carbohydrates
           : carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ) as $Val);
   }
 }
@@ -141,17 +134,16 @@ abstract class _$$RecipeDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int recipe_id,
-      String recipe_name,
-      String author_uid,
+      {int id,
+      String name,
       List<IngredientDTO> ingredients_distributions,
       int cook_time_mins,
       int? prep_time_mins,
-      int servings,
-      int kilocalories,
-      int proteins,
-      int fats,
-      int carbohydrates});
+      double servings,
+      double calories,
+      double proteins,
+      double fats,
+      double carbohydrates});
 }
 
 /// @nodoc
@@ -165,30 +157,25 @@ class __$$RecipeDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recipe_id = null,
-    Object? recipe_name = null,
-    Object? author_uid = null,
+    Object? id = null,
+    Object? name = null,
     Object? ingredients_distributions = null,
     Object? cook_time_mins = null,
     Object? prep_time_mins = freezed,
     Object? servings = null,
-    Object? kilocalories = null,
+    Object? calories = null,
     Object? proteins = null,
     Object? fats = null,
     Object? carbohydrates = null,
   }) {
     return _then(_$RecipeDTOImpl(
-      recipe_id: null == recipe_id
-          ? _value.recipe_id
-          : recipe_id // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as int,
-      recipe_name: null == recipe_name
-          ? _value.recipe_name
-          : recipe_name // ignore: cast_nullable_to_non_nullable
-              as String,
-      author_uid: null == author_uid
-          ? _value.author_uid
-          : author_uid // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       ingredients_distributions: null == ingredients_distributions
           ? _value._ingredients_distributions
@@ -205,23 +192,23 @@ class __$$RecipeDTOImplCopyWithImpl<$Res>
       servings: null == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as int,
-      kilocalories: null == kilocalories
-          ? _value.kilocalories
-          : kilocalories // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
       proteins: null == proteins
           ? _value.proteins
           : proteins // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       fats: null == fats
           ? _value.fats
           : fats // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       carbohydrates: null == carbohydrates
           ? _value.carbohydrates
           : carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -230,14 +217,13 @@ class __$$RecipeDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
   _$RecipeDTOImpl(
-      {required this.recipe_id,
-      required this.recipe_name,
-      required this.author_uid,
+      {required this.id,
+      required this.name,
       required final List<IngredientDTO> ingredients_distributions,
       required this.cook_time_mins,
       required this.prep_time_mins,
       required this.servings,
-      required this.kilocalories,
+      required this.calories,
       required this.proteins,
       required this.fats,
       required this.carbohydrates})
@@ -247,11 +233,9 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
       _$$RecipeDTOImplFromJson(json);
 
   @override
-  final int recipe_id;
+  final int id;
   @override
-  final String recipe_name;
-  @override
-  final String author_uid;
+  final String name;
   final List<IngredientDTO> _ingredients_distributions;
   @override
   List<IngredientDTO> get ingredients_distributions {
@@ -266,19 +250,19 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
   @override
   final int? prep_time_mins;
   @override
-  final int servings;
+  final double servings;
   @override
-  final int kilocalories;
+  final double calories;
   @override
-  final int proteins;
+  final double proteins;
   @override
-  final int fats;
+  final double fats;
   @override
-  final int carbohydrates;
+  final double carbohydrates;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecipeDTO(recipe_id: $recipe_id, recipe_name: $recipe_name, author_uid: $author_uid, ingredients_distributions: $ingredients_distributions, cook_time_mins: $cook_time_mins, prep_time_mins: $prep_time_mins, servings: $servings, kilocalories: $kilocalories, proteins: $proteins, fats: $fats, carbohydrates: $carbohydrates)';
+    return 'RecipeDTO(id: $id, name: $name, ingredients_distributions: $ingredients_distributions, cook_time_mins: $cook_time_mins, prep_time_mins: $prep_time_mins, servings: $servings, calories: $calories, proteins: $proteins, fats: $fats, carbohydrates: $carbohydrates)';
   }
 
   @override
@@ -286,15 +270,14 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'RecipeDTO'))
-      ..add(DiagnosticsProperty('recipe_id', recipe_id))
-      ..add(DiagnosticsProperty('recipe_name', recipe_name))
-      ..add(DiagnosticsProperty('author_uid', author_uid))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty(
           'ingredients_distributions', ingredients_distributions))
       ..add(DiagnosticsProperty('cook_time_mins', cook_time_mins))
       ..add(DiagnosticsProperty('prep_time_mins', prep_time_mins))
       ..add(DiagnosticsProperty('servings', servings))
-      ..add(DiagnosticsProperty('kilocalories', kilocalories))
+      ..add(DiagnosticsProperty('calories', calories))
       ..add(DiagnosticsProperty('proteins', proteins))
       ..add(DiagnosticsProperty('fats', fats))
       ..add(DiagnosticsProperty('carbohydrates', carbohydrates));
@@ -305,12 +288,8 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeDTOImpl &&
-            (identical(other.recipe_id, recipe_id) ||
-                other.recipe_id == recipe_id) &&
-            (identical(other.recipe_name, recipe_name) ||
-                other.recipe_name == recipe_name) &&
-            (identical(other.author_uid, author_uid) ||
-                other.author_uid == author_uid) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(
                 other._ingredients_distributions, _ingredients_distributions) &&
             (identical(other.cook_time_mins, cook_time_mins) ||
@@ -319,8 +298,8 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
                 other.prep_time_mins == prep_time_mins) &&
             (identical(other.servings, servings) ||
                 other.servings == servings) &&
-            (identical(other.kilocalories, kilocalories) ||
-                other.kilocalories == kilocalories) &&
+            (identical(other.calories, calories) ||
+                other.calories == calories) &&
             (identical(other.proteins, proteins) ||
                 other.proteins == proteins) &&
             (identical(other.fats, fats) || other.fats == fats) &&
@@ -332,14 +311,13 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      recipe_id,
-      recipe_name,
-      author_uid,
+      id,
+      name,
       const DeepCollectionEquality().hash(_ingredients_distributions),
       cook_time_mins,
       prep_time_mins,
       servings,
-      kilocalories,
+      calories,
       proteins,
       fats,
       carbohydrates);
@@ -360,27 +338,24 @@ class _$RecipeDTOImpl with DiagnosticableTreeMixin implements _RecipeDTO {
 
 abstract class _RecipeDTO implements RecipeDTO {
   factory _RecipeDTO(
-      {required final int recipe_id,
-      required final String recipe_name,
-      required final String author_uid,
+      {required final int id,
+      required final String name,
       required final List<IngredientDTO> ingredients_distributions,
       required final int cook_time_mins,
       required final int? prep_time_mins,
-      required final int servings,
-      required final int kilocalories,
-      required final int proteins,
-      required final int fats,
-      required final int carbohydrates}) = _$RecipeDTOImpl;
+      required final double servings,
+      required final double calories,
+      required final double proteins,
+      required final double fats,
+      required final double carbohydrates}) = _$RecipeDTOImpl;
 
   factory _RecipeDTO.fromJson(Map<String, dynamic> json) =
       _$RecipeDTOImpl.fromJson;
 
   @override
-  int get recipe_id;
+  int get id;
   @override
-  String get recipe_name;
-  @override
-  String get author_uid;
+  String get name;
   @override
   List<IngredientDTO> get ingredients_distributions;
   @override
@@ -388,15 +363,15 @@ abstract class _RecipeDTO implements RecipeDTO {
   @override
   int? get prep_time_mins;
   @override
-  int get servings;
+  double get servings;
   @override
-  int get kilocalories;
+  double get calories;
   @override
-  int get proteins;
+  double get proteins;
   @override
-  int get fats;
+  double get fats;
   @override
-  int get carbohydrates;
+  double get carbohydrates;
   @override
   @JsonKey(ignore: true)
   _$$RecipeDTOImplCopyWith<_$RecipeDTOImpl> get copyWith =>

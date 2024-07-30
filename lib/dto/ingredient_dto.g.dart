@@ -10,7 +10,7 @@ _$IngredientDTOImpl _$$IngredientDTOImplFromJson(Map<String, dynamic> json) =>
     _$IngredientDTOImpl(
       ingredient_id: (json['ingredient_id'] as num).toInt(),
       name: json['name'] as String,
-      count: (json['count'] as num).toInt(),
+      count: (json['count'] as num).toDouble(),
       measure_unit_name: json['measure_unit_name'] as String,
     );
 

@@ -22,11 +22,11 @@ ProductDTO _$ProductDTOFromJson(Map<String, dynamic> json) {
 mixin _$ProductDTO {
   int get product_id => throw _privateConstructorUsedError;
   String get product_name => throw _privateConstructorUsedError;
-  int get serving => throw _privateConstructorUsedError;
-  int get protein => throw _privateConstructorUsedError;
-  int get fat => throw _privateConstructorUsedError;
-  int get carbohydrates => throw _privateConstructorUsedError;
-  int get energyValue => throw _privateConstructorUsedError;
+  double get serving => throw _privateConstructorUsedError;
+  double get proteins => throw _privateConstructorUsedError;
+  double get fats => throw _privateConstructorUsedError;
+  double get carbohydrates => throw _privateConstructorUsedError;
+  double get calories => throw _privateConstructorUsedError;
   String get categories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,11 +44,11 @@ abstract class $ProductDTOCopyWith<$Res> {
   $Res call(
       {int product_id,
       String product_name,
-      int serving,
-      int protein,
-      int fat,
-      int carbohydrates,
-      int energyValue,
+      double serving,
+      double proteins,
+      double fats,
+      double carbohydrates,
+      double calories,
       String categories});
 }
 
@@ -68,10 +68,10 @@ class _$ProductDTOCopyWithImpl<$Res, $Val extends ProductDTO>
     Object? product_id = null,
     Object? product_name = null,
     Object? serving = null,
-    Object? protein = null,
-    Object? fat = null,
+    Object? proteins = null,
+    Object? fats = null,
     Object? carbohydrates = null,
-    Object? energyValue = null,
+    Object? calories = null,
     Object? categories = null,
   }) {
     return _then(_value.copyWith(
@@ -86,23 +86,23 @@ class _$ProductDTOCopyWithImpl<$Res, $Val extends ProductDTO>
       serving: null == serving
           ? _value.serving
           : serving // ignore: cast_nullable_to_non_nullable
-              as int,
-      protein: null == protein
-          ? _value.protein
-          : protein // ignore: cast_nullable_to_non_nullable
-              as int,
-      fat: null == fat
-          ? _value.fat
-          : fat // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      proteins: null == proteins
+          ? _value.proteins
+          : proteins // ignore: cast_nullable_to_non_nullable
+              as double,
+      fats: null == fats
+          ? _value.fats
+          : fats // ignore: cast_nullable_to_non_nullable
+              as double,
       carbohydrates: null == carbohydrates
           ? _value.carbohydrates
           : carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
-      energyValue: null == energyValue
-          ? _value.energyValue
-          : energyValue // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
       categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -122,11 +122,11 @@ abstract class _$$ProductDTOImplCopyWith<$Res>
   $Res call(
       {int product_id,
       String product_name,
-      int serving,
-      int protein,
-      int fat,
-      int carbohydrates,
-      int energyValue,
+      double serving,
+      double proteins,
+      double fats,
+      double carbohydrates,
+      double calories,
       String categories});
 }
 
@@ -144,10 +144,10 @@ class __$$ProductDTOImplCopyWithImpl<$Res>
     Object? product_id = null,
     Object? product_name = null,
     Object? serving = null,
-    Object? protein = null,
-    Object? fat = null,
+    Object? proteins = null,
+    Object? fats = null,
     Object? carbohydrates = null,
-    Object? energyValue = null,
+    Object? calories = null,
     Object? categories = null,
   }) {
     return _then(_$ProductDTOImpl(
@@ -162,23 +162,23 @@ class __$$ProductDTOImplCopyWithImpl<$Res>
       serving: null == serving
           ? _value.serving
           : serving // ignore: cast_nullable_to_non_nullable
-              as int,
-      protein: null == protein
-          ? _value.protein
-          : protein // ignore: cast_nullable_to_non_nullable
-              as int,
-      fat: null == fat
-          ? _value.fat
-          : fat // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      proteins: null == proteins
+          ? _value.proteins
+          : proteins // ignore: cast_nullable_to_non_nullable
+              as double,
+      fats: null == fats
+          ? _value.fats
+          : fats // ignore: cast_nullable_to_non_nullable
+              as double,
       carbohydrates: null == carbohydrates
           ? _value.carbohydrates
           : carbohydrates // ignore: cast_nullable_to_non_nullable
-              as int,
-      energyValue: null == energyValue
-          ? _value.energyValue
-          : energyValue // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
       categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -194,10 +194,10 @@ class _$ProductDTOImpl with DiagnosticableTreeMixin implements _ProductDTO {
       {required this.product_id,
       required this.product_name,
       required this.serving,
-      required this.protein,
-      required this.fat,
+      required this.proteins,
+      required this.fats,
       required this.carbohydrates,
-      required this.energyValue,
+      required this.calories,
       required this.categories});
 
   factory _$ProductDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -208,21 +208,21 @@ class _$ProductDTOImpl with DiagnosticableTreeMixin implements _ProductDTO {
   @override
   final String product_name;
   @override
-  final int serving;
+  final double serving;
   @override
-  final int protein;
+  final double proteins;
   @override
-  final int fat;
+  final double fats;
   @override
-  final int carbohydrates;
+  final double carbohydrates;
   @override
-  final int energyValue;
+  final double calories;
   @override
   final String categories;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProductDTO(product_id: $product_id, product_name: $product_name, serving: $serving, protein: $protein, fat: $fat, carbohydrates: $carbohydrates, energyValue: $energyValue, categories: $categories)';
+    return 'ProductDTO(product_id: $product_id, product_name: $product_name, serving: $serving, proteins: $proteins, fats: $fats, carbohydrates: $carbohydrates, calories: $calories, categories: $categories)';
   }
 
   @override
@@ -233,10 +233,10 @@ class _$ProductDTOImpl with DiagnosticableTreeMixin implements _ProductDTO {
       ..add(DiagnosticsProperty('product_id', product_id))
       ..add(DiagnosticsProperty('product_name', product_name))
       ..add(DiagnosticsProperty('serving', serving))
-      ..add(DiagnosticsProperty('protein', protein))
-      ..add(DiagnosticsProperty('fat', fat))
+      ..add(DiagnosticsProperty('proteins', proteins))
+      ..add(DiagnosticsProperty('fats', fats))
       ..add(DiagnosticsProperty('carbohydrates', carbohydrates))
-      ..add(DiagnosticsProperty('energyValue', energyValue))
+      ..add(DiagnosticsProperty('calories', calories))
       ..add(DiagnosticsProperty('categories', categories));
   }
 
@@ -250,12 +250,13 @@ class _$ProductDTOImpl with DiagnosticableTreeMixin implements _ProductDTO {
             (identical(other.product_name, product_name) ||
                 other.product_name == product_name) &&
             (identical(other.serving, serving) || other.serving == serving) &&
-            (identical(other.protein, protein) || other.protein == protein) &&
-            (identical(other.fat, fat) || other.fat == fat) &&
+            (identical(other.proteins, proteins) ||
+                other.proteins == proteins) &&
+            (identical(other.fats, fats) || other.fats == fats) &&
             (identical(other.carbohydrates, carbohydrates) ||
                 other.carbohydrates == carbohydrates) &&
-            (identical(other.energyValue, energyValue) ||
-                other.energyValue == energyValue) &&
+            (identical(other.calories, calories) ||
+                other.calories == calories) &&
             (identical(other.categories, categories) ||
                 other.categories == categories));
   }
@@ -263,7 +264,7 @@ class _$ProductDTOImpl with DiagnosticableTreeMixin implements _ProductDTO {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, product_id, product_name,
-      serving, protein, fat, carbohydrates, energyValue, categories);
+      serving, proteins, fats, carbohydrates, calories, categories);
 
   @JsonKey(ignore: true)
   @override
@@ -283,11 +284,11 @@ abstract class _ProductDTO implements ProductDTO {
   factory _ProductDTO(
       {required final int product_id,
       required final String product_name,
-      required final int serving,
-      required final int protein,
-      required final int fat,
-      required final int carbohydrates,
-      required final int energyValue,
+      required final double serving,
+      required final double proteins,
+      required final double fats,
+      required final double carbohydrates,
+      required final double calories,
       required final String categories}) = _$ProductDTOImpl;
 
   factory _ProductDTO.fromJson(Map<String, dynamic> json) =
@@ -298,15 +299,15 @@ abstract class _ProductDTO implements ProductDTO {
   @override
   String get product_name;
   @override
-  int get serving;
+  double get serving;
   @override
-  int get protein;
+  double get proteins;
   @override
-  int get fat;
+  double get fats;
   @override
-  int get carbohydrates;
+  double get carbohydrates;
   @override
-  int get energyValue;
+  double get calories;
   @override
   String get categories;
   @override

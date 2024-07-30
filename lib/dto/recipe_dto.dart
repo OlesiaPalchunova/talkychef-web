@@ -9,17 +9,16 @@ part 'recipe_dto.g.dart';
 @freezed
 class RecipeDTO with _$RecipeDTO {
   factory RecipeDTO({
-    required int recipe_id,
-    required String recipe_name,
-    required String author_uid,
+    required int id,
+    required String name,
     required List<IngredientDTO> ingredients_distributions,
     required int cook_time_mins,
     required int? prep_time_mins,
-    required int servings,
-    required int kilocalories,
-    required int proteins,
-    required int fats,
-    required int carbohydrates,
+    required double servings,
+    required double calories,
+    required double proteins,
+    required double fats,
+    required double carbohydrates,
   }) = _RecipeDTO;
 
   factory RecipeDTO.fromJson(Map<String, Object?> json) =>

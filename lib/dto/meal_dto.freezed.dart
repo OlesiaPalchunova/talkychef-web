@@ -22,7 +22,7 @@ MealDTO _$MealDTOFromJson(Map<String, dynamic> json) {
 mixin _$MealDTO {
   List<RecipeDTO> get recipes => throw _privateConstructorUsedError;
   List<ProductDTO> get products => throw _privateConstructorUsedError;
-  int get kilocalories => throw _privateConstructorUsedError;
+  int get calories => throw _privateConstructorUsedError;
   int get proteins => throw _privateConstructorUsedError;
   int get fats => throw _privateConstructorUsedError;
   int get carbohydrates => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $MealDTOCopyWith<$Res> {
   $Res call(
       {List<RecipeDTO> recipes,
       List<ProductDTO> products,
-      int kilocalories,
+      int calories,
       int proteins,
       int fats,
       int carbohydrates});
@@ -61,7 +61,7 @@ class _$MealDTOCopyWithImpl<$Res, $Val extends MealDTO>
   $Res call({
     Object? recipes = null,
     Object? products = null,
-    Object? kilocalories = null,
+    Object? calories = null,
     Object? proteins = null,
     Object? fats = null,
     Object? carbohydrates = null,
@@ -75,9 +75,9 @@ class _$MealDTOCopyWithImpl<$Res, $Val extends MealDTO>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductDTO>,
-      kilocalories: null == kilocalories
-          ? _value.kilocalories
-          : kilocalories // ignore: cast_nullable_to_non_nullable
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
               as int,
       proteins: null == proteins
           ? _value.proteins
@@ -105,7 +105,7 @@ abstract class _$$MealDTOImplCopyWith<$Res> implements $MealDTOCopyWith<$Res> {
   $Res call(
       {List<RecipeDTO> recipes,
       List<ProductDTO> products,
-      int kilocalories,
+      int calories,
       int proteins,
       int fats,
       int carbohydrates});
@@ -124,7 +124,7 @@ class __$$MealDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? recipes = null,
     Object? products = null,
-    Object? kilocalories = null,
+    Object? calories = null,
     Object? proteins = null,
     Object? fats = null,
     Object? carbohydrates = null,
@@ -138,9 +138,9 @@ class __$$MealDTOImplCopyWithImpl<$Res>
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductDTO>,
-      kilocalories: null == kilocalories
-          ? _value.kilocalories
-          : kilocalories // ignore: cast_nullable_to_non_nullable
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
               as int,
       proteins: null == proteins
           ? _value.proteins
@@ -164,7 +164,7 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
   _$MealDTOImpl(
       {required final List<RecipeDTO> recipes,
       required final List<ProductDTO> products,
-      required this.kilocalories,
+      required this.calories,
       required this.proteins,
       required this.fats,
       required this.carbohydrates})
@@ -191,7 +191,7 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
   }
 
   @override
-  final int kilocalories;
+  final int calories;
   @override
   final int proteins;
   @override
@@ -201,7 +201,7 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MealDTO(recipes: $recipes, products: $products, kilocalories: $kilocalories, proteins: $proteins, fats: $fats, carbohydrates: $carbohydrates)';
+    return 'MealDTO(recipes: $recipes, products: $products, calories: $calories, proteins: $proteins, fats: $fats, carbohydrates: $carbohydrates)';
   }
 
   @override
@@ -211,7 +211,7 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
       ..add(DiagnosticsProperty('type', 'MealDTO'))
       ..add(DiagnosticsProperty('recipes', recipes))
       ..add(DiagnosticsProperty('products', products))
-      ..add(DiagnosticsProperty('kilocalories', kilocalories))
+      ..add(DiagnosticsProperty('calories', calories))
       ..add(DiagnosticsProperty('proteins', proteins))
       ..add(DiagnosticsProperty('fats', fats))
       ..add(DiagnosticsProperty('carbohydrates', carbohydrates));
@@ -224,8 +224,8 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
             other is _$MealDTOImpl &&
             const DeepCollectionEquality().equals(other._recipes, _recipes) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
-            (identical(other.kilocalories, kilocalories) ||
-                other.kilocalories == kilocalories) &&
+            (identical(other.calories, calories) ||
+                other.calories == calories) &&
             (identical(other.proteins, proteins) ||
                 other.proteins == proteins) &&
             (identical(other.fats, fats) || other.fats == fats) &&
@@ -239,7 +239,7 @@ class _$MealDTOImpl with DiagnosticableTreeMixin implements _MealDTO {
       runtimeType,
       const DeepCollectionEquality().hash(_recipes),
       const DeepCollectionEquality().hash(_products),
-      kilocalories,
+      calories,
       proteins,
       fats,
       carbohydrates);
@@ -262,7 +262,7 @@ abstract class _MealDTO implements MealDTO {
   factory _MealDTO(
       {required final List<RecipeDTO> recipes,
       required final List<ProductDTO> products,
-      required final int kilocalories,
+      required final int calories,
       required final int proteins,
       required final int fats,
       required final int carbohydrates}) = _$MealDTOImpl;
@@ -274,7 +274,7 @@ abstract class _MealDTO implements MealDTO {
   @override
   List<ProductDTO> get products;
   @override
-  int get kilocalories;
+  int get calories;
   @override
   int get proteins;
   @override

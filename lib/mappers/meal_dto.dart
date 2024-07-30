@@ -10,7 +10,7 @@ class MealMapper{
       proteins: dto.proteins,
       fats: dto.fats,
       carbohydrates: dto.carbohydrates,
-      kilocalories: dto.kilocalories,
+      calories: dto.calories,
       recipes: dto.recipes.map((recipe_dto) => RecipeMapper().fromDto(recipe_dto)).toList(),
       products: dto.products.map((product_dto) => ProductMapper().fromDto(product_dto)).toList(),
     );
@@ -22,7 +22,7 @@ class MealMapper{
       proteins: entity.proteins,
       fats: entity.fats,
       carbohydrates: entity.carbohydrates,
-      kilocalories: entity.kilocalories,
+      calories: entity.calories,
       recipes: entity.recipes.map((recipe_dto) => RecipeMapper().toDto(recipe_dto)).toList(),
       products: entity.products.map((product_dto) => ProductMapper().toDto(product_dto)).toList(),
     );
