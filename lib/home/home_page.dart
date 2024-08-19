@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _getDailyMenu() {
+  Future<void> _getDailyMenu() async {
     int id = 0;
     for (var d in diagnosis) {
       if (d.diagnosisDescription == currentDiagnose) {
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final height = currentHeight!.split(' ');
     final weight = currentWeight!.split(' ');
     final age = currentAge!.split(' ');
-    DailyMenuService()
+    await DailyMenuService()
         .getDailyMenu(height[0], weight[0], age[0], selected[0] == true, currentPhysicalActivityLevel!, id)
         .then((value) {
       setState(() {
@@ -260,15 +260,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     //diagnoseId
                     if (!infoExist) TextButton(
-                      onPressed: () {
-                        setState(() {
+                      onPressed: () async {
+                        setState(() async {
                           if (currentHeight != null
                               && currentAge != null
                               && currentDiagnose != null
                               && currentPhysicalActivityLevel != null
                               && currentWeight != null) {
                               infoExist = true;
-                              _getDailyMenu();
+                              await _getDailyMenu();
                             }
                           });
                       },
@@ -367,22 +367,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return num;
   }
 
+  List<int> createValues(int fats, int carbohydrates, int proteins) {
+    final total = fats + carbohydrates + proteins;
+    return [
+      fats * 100 ~/ total,
+      carbohydrates * 100 ~/ total,
+      100 - (fats * 100 ~/ total) - carbohydrates * 100 ~/ total,
+    ];
+  }
+
   Widget _filledBody() {
-    List<int> breakfastValues = [
+    List<int> breakfastValues = createValues(
       dailyMenu.breakfastMeals.fats,
       dailyMenu.breakfastMeals.carbohydrates,
       dailyMenu.breakfastMeals.proteins,
-    ];
-    List<int> launchValues = [
+    );
+    List<int> launchValues = createValues(
       dailyMenu.launchMeals.fats,
       dailyMenu.launchMeals.carbohydrates,
       dailyMenu.launchMeals.proteins,
-    ];
-    List<int> dinnerValues = [
+    );
+    List<int> dinnerValues = createValues(
       dailyMenu.dinnerMeals.fats,
       dailyMenu.dinnerMeals.carbohydrates,
       dailyMenu.dinnerMeals.proteins,
-    ];
+    );
     List<Color> colors = [
       MyColors().darkComponent,
       MyColors().orange,

@@ -41,13 +41,9 @@ class DailyMenuService {
       if (response.statusCode != 200) {
         throw Exception('status code = ${response.statusCode}');
       } else {
-        print(4545666);
-        print((response.data as List<dynamic>?)?[0]);
-        print(DiagnosisDTO.fromJson((response.data as List<dynamic>?)?[0]));
         final List<DiagnosisDTO>? diagnosis = (response.data as List<dynamic>?)
             ?.map((e) => DiagnosisDTO.fromJson(e))
             .toList();
-        print(4545666);
         return (diagnosis ?? []).map((dto) => DiagnosisMapper().fromDto(dto)).toList();
       }
     } catch (e) {
@@ -66,7 +62,6 @@ class DailyMenuService {
         final List<String>? activitylevels = (response.data as List<dynamic>?)
             ?.map((e) => e as String)
             .toList();
-        print(activitylevels);
         return activitylevels ?? [];
       }
     } catch (e) {
@@ -85,7 +80,6 @@ class DailyMenuService {
         "diagnose_id": diagnoseId.toString(),
       };
 
-      print(params);
       final response = await _dio.post(
           'http://37.230.116.111:5756/api/v1/daily-menu',
         data: jsonEncode(params),
@@ -125,7 +119,6 @@ class DailyMenuService {
             dailyMenu.dinnerMeals = MealMapper().fromDto(meal);
             break;
         }
-        getPDF(dailyMenu);
         return dailyMenu;
       }
     } catch (e) {
@@ -176,17 +169,13 @@ class DailyMenuService {
   Future<DailyMenu> updateRecipe(int id, MealType mealType, int diagnoseId, DailyMenu dailyMenu) async {
     try {
       final dailyMenuJson = fetchDailyMenu(dailyMenu);
-      print(67676776111);
-      print(dailyMenu.breakfastMeals.recipes.map((e) => e.id).toList());
-      print(dailyMenuJson);
-      print("http://37.230.116.111:5756/api/v1/daily-menu/update/recipe/${id}?diagnose_id=${diagnoseId}");
+      final json = jsonMenu;
+      json['total_params']['imt'] = dailyMenuJson['total_params']['imt'];
       final response = await _dio.put(
         'http://37.230.116.111:5756/api/v1/daily-menu/update/recipe/2905?diagnose_id=${diagnoseId}',
-        data: jsonMenu,
+        data: json,
       );
-      print(67676776111);
       if (response.statusCode != 200) {
-        print(5555555);
         throw Exception('status code = ${response.statusCode}');
       } else {
         final recipe = RecipeDTO.fromJson(response.data["recipe"]);
@@ -221,9 +210,7 @@ class DailyMenuService {
 
   Future<Uint8List> getPDF(DailyMenu dailyMenu) async {
     try {
-      var savePath = 'C:/Users/lisia/StudioProjects/talkychef-web/files/meal.pdf';
       final dailyMenuJson = fetchDailyMenu(dailyMenu);
-      print(33322222);
       final response = await _dio.post(
         'http://37.230.116.111:5756/api/v1/daily-menu/getpdf',
         data: dailyMenuJson,
@@ -232,28 +219,10 @@ class DailyMenuService {
           followRedirects: false,
         ),
       );
-      print(33322222);
       if (response.statusCode != 200) {
         throw Exception('status code = ${response.statusCode}');
       } else {
         return response.data;
-        print(33322222);
-        // var file = File(savePath);
-        print(8888888);
-        print(response.data.runtimeType);
-        // List<int> pdfDataBytes = base64.decode(response.data.)
-        //     .map((number) => int.parse(number));
-        // final res = Uint8List.fromList(response.data);
-        print(8888888);
-        // print(response.toString());
-        // var raf = file.openSync(mode: FileMode.write);
-        // print(8888888);
-        // raf.writeFromSync(response.data);
-        // await raf.close();
-        // var data = json.decode(response.data);
-        // print(12345);
-        // var pdfData = base64.decode(data["base64"]);
-        // print(response.data.);
       }
     } catch (e) {
       throw Exception('bebebe');
