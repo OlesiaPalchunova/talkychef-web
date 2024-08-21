@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 import 'package:sberlab/assets/sizes.dart';
 import 'package:sberlab/components/block.dart';
@@ -33,6 +34,8 @@ import 'package:sberlab/service/mock_daily_menu_service.dart';
 import '../assets/colors.dart';
 import 'dart:html' as html;
 
+import '../components/text_field_widget.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -56,8 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   List<Diagnosis> diagnosis = [];
 
-  String? currentHeight;
-  String? currentWeight;
   String? currentAge;
   String? currentPhysicalActivityLevel;
   String? currentDiagnose;
@@ -103,11 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     print(454545);
     print(id);
-    final height = currentHeight!.split(' ');
-    final weight = currentWeight!.split(' ');
+    final height = heightController.text;
+    final weight = weightController.text;
     final age = currentAge!.split(' ');
     await DailyMenuService()
-        .getDailyMenu(height[0], weight[0], age[0], selected[0] == true, currentPhysicalActivityLevel!, id)
+        .getDailyMenu(height, weight, age[0], selected[0] == true, currentPhysicalActivityLevel!, id)
         .then((value) {
       setState(() {
         dailyMenu = value;
@@ -150,14 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() => currentAge = age ?? currentAge);
   }
 
-  void onChangedHeight(String? height) {
-    setState(() => currentHeight = height ?? currentHeight);
-  }
-
-  void onChangedWeight(String? weight) {
-    setState(() => currentWeight = weight ?? currentWeight);
-  }
-
   void onChangedPhysicalActivityLevel(String? physicalActivityLeve) {
     setState(() => currentPhysicalActivityLevel =
         physicalActivityLeve ?? currentPhysicalActivityLevel);
@@ -168,7 +161,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onChangedGender(int index) {
-    print(444);
     setState(() {
       for (int i = 0; i < selected.length; i++) {
         selected[i] = i == index;
@@ -200,6 +192,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -215,22 +210,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: MediaQuery.of(context).size.width * 0.01,
                 child: Row(
                   children: [
-                    TopDropButton(
-                      dropdownValue: currentHeight,
-                      list: heights,
-                      onChanged: onChangedHeight,
-                      hint: hintHeight,
-                      width: 80,
+                    TextFieldWidget(
+                      title: hintHeight,
+                      controller: heightController,
                     ),
-                    //height
-                    TopDropButton(
-                      dropdownValue: currentWeight,
-                      list: weights,
-                      onChanged: onChangedWeight,
-                      hint: hintWeight,
-                      width: 70,
+                    TextFieldWidget(
+                      title: hintWeight,
+                      controller: weightController,
                     ),
-                    //weight
                     TopDropButton(
                       dropdownValue: currentAge,
                       list: ages,
@@ -262,11 +249,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     if (!infoExist) TextButton(
                       onPressed: () async {
                         setState(() async {
-                          if (currentHeight != null
+                          if (weightController.text.isNotEmpty
                               && currentAge != null
                               && currentDiagnose != null
                               && currentPhysicalActivityLevel != null
-                              && currentWeight != null) {
+                              && heightController.text.isNotEmpty) {
                               infoExist = true;
                               await _getDailyMenu();
                             }
